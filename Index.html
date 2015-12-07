@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="Nutanix">
+<head>
+    <title>NUTANIX</title>
+    <link rel="shortcut icon" type="image/x-icon" href="css/favicon.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,500' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-beta.5/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.1/css/lightbox.css" rel="stylesheet" />
+    <link href="css/custom.css" rel="stylesheet" />
+</head>
+<body data-ng-controller="ProdController as prod" >
+    <div class="page-header" style="height:90px;top:0;margin:0;padding:0;border-bottom:3px solid black">
+        <br />
+        <img src="http://www.nutanix.com/wp-content/themes/nutanix/assets/images/Nutanix-Logo.png" id="img1" height="20" width="125" style="padding:0;margin:0;top:10px" /><br />
+        <span style="font-size:2em;color:rgb(30, 130, 76)">&nbsp;&nbsp;&nbsp;&nbsp;DealsHub</span>
+        <span style="color:rgb(144, 198, 149)">--finding deals made easy</span>
+            <span class="panel pan" >
+               &nbsp;Total likes: <span style="font-weight:normal">{{totallikes}}</span> &nbsp; | &nbsp;  Api Hits: <span style="font-weight:normal">
+    {{apihits.api_hits}}</span> &nbsp;
+</span>
+        
+    </div>
+   
+    <div class="row" style="margin-left:5%;margin-right:5%;margin-top:10px" >
+            <div class="col-lg-4 dddd" data-ng-repeat="product in products.deals" style="-webkit-transition-delay:{{$index * 100}}ms">
+                <div class="panel panel-default hov">
+                    <div class="panel-heading" style="background-color:rgb(103, 128, 159)">
+                        <span><i class="fa fa-angle-double-right fa-2x"></i>&nbsp;&nbsp;</span><span style="font-size:1.5em;font-weight:bold">{{product.name}}</span><br />
+                        <i class="glyphicon glyphicon-user"></i>&nbsp;<span style="font-size:1em;font-weight:bold">Provider: </span><span>{{product.provider}}</span>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="{{product.image}}" data-lightbox="image-1" data-title="{{product.name}}" class="thumbnail">
+                                    <img src="{{product.image}}" style="height:150px;width:150px">
+                                </a>
+                            </div>
+                            <div class="col-md-8">
+                                <ul class="list-group" style="border:none">
+                                    <li class="list-group-item">
+                                        <div class="star-ratings-css">
+                                            <div class="star-ratings-css-top" style="width:{{(product.rating / 5)*100}}%"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                            <div class="star-ratings-css-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                                        </div>
+                                    </li>
+
+                                    <li class="list-group-item"><i class="fa fa-link"></i>&nbsp;<a href="{{product.link}}" target="_blank">{{product.link | limitTo:28}}</a> </li>
+                                    <li class="list-group-item"><i class="fa fa-tag"></i>&nbsp;&nbsp;<span style="font-weight:bold">Actual Price</span> <span class="pull-right" style="color:red;text-decoration:line-through;"><span style="color:black;opacity:0.5">{{product.actual_price | currency:"&#8377;"}}</span></span></li>
+                                    <li class="list-group-item"><i class="fa fa-tag"></i>&nbsp;&nbsp;<span style="font-weight:bold">Final Price</span> <span class="pull-right">{{(product.actual_price) - ((product.actual_price / 100) *(product.discount | limitTo:2)) |  currency:"&#8377;"}}</span></li>
+                                    <li class="list-group-item">
+                                        Discount:<span class="label label-success">{{product.discount}}</span>
+                                          <button class="btn btn-primary" ng-click="prod.like1($index)" type="button">
+                                            <i class="fa fa-thumbs-o-up"></i> Likes <span class="badge">{{product.like}}</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <script src="app/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.1/js/lightbox.js"></script>
+    <script>
+        lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true
+        });
+    </script>
+</body>
+
+</html>
+
+
